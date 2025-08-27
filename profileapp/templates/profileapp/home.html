@@ -1,0 +1,32 @@
+{% extends "Profileapp/Layout/base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <div class="text-center mb-5">
+    <h1 class="fw-bold">Welcome to ProfileApp</h1>
+    <p class="text-muted">Upload and view your profile picture instantly!</p>
+    <a href="{% url 'create_profile' %}" class="btn btn-primary btn-lg">Upload Profile</a>
+  </div>
+
+  <div class="row">
+    {% for profile in profiles %}
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+          {% if profile.profile_pic %}
+            <img src="{{ profile.profile_pic.url }}" class="card-img-top" alt="{{ profile.name }}">
+          {% else %}
+            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="No image">
+          {% endif %}
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ profile.name }}</h5>
+            <a href="{% url 'profile_detail' profile.pk %}" class="btn btn-outline-primary btn-sm">
+              View Profile
+            </a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center">No profiles yet. <a href="{% url 'create_profile' %}">Upload one now!</a></p>
+    {% endfor %}
+  </div>
+{% endblock %}

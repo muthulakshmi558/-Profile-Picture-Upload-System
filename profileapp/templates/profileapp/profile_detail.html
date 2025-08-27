@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<body>
+  <h1>{{ profile.name }}</h1>
+
+  {% if profile.profile_pic %}
+    <img src="{{ profile.profile_pic.url }}" alt="{{ profile.name }}" style="max-width:240px;">
+  {% else %}
+    <p>No image uploaded.</p>
+  {% endif %}
+
+  <p><a href="{% url 'create_profile' %}">Upload another</a></p>
+</body>
+</html>
